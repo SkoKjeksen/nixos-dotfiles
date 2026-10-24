@@ -33,11 +33,16 @@ in
 
   # Services
   # services.mako.enable = true;
-  programs.zsh.enable = true;
   programs.starship.enable = true;
   services.swayidle.enable = true;
   services.polkit-gnome.enable = true;
 
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+  };
 
   programs.git = {
       enable = true;
@@ -52,7 +57,11 @@ in
       btw = "echo i use nixos, btw";
     };
   };
-
+  
+  programs.zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+    };
   # Symlink configuration files
   xdg.configFile = builtins.mapAttrs
     (name: subpath: {
@@ -63,7 +72,6 @@ in
 
   # Packages
   home.packages = with pkgs; [
-    zoxide
     swaybg
     xwayland-satellite
     neovim
