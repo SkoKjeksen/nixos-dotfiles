@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports =
@@ -24,19 +24,31 @@
 
   # Enable the GNOME Desktop Environment.
   # services.displayManager.gdm.enable = true;
-  # services.desktopManager.gnome.enable = true;
-  # Niri
-  programs.niri.enable = true;
+programs.regreet = {
+    enable = true;
+
+    settings  = {
+        GTK = {
+            application_prefer_dark_theme = true;
+            theme_name = lib.mkForce "Adwaita-dark";
+            font_name = lib.mkForce "JetBrains Mono 12";
+          };
+      };
+  };
   services.greetd = {
       enable = true;
       settings = {
           default_session = {
-              command = "${config.programs.niri.package}/bin/niri-session";
-              user = "emil";
+              # command = "${config.programs.niri.package}/bin/niri-session";
+              # command = "${pkgs.niri}/bin/niri --session";
+              command = "${pkgs.cage}/bin/cage -s -- ${pkgs.regreet}/bin/regreet";
+              user = "greeter";
             };
         };
     };
 
+programs.niri.enable = true;
+services.desktopManager.gnome.enable = true;
 systemd.user.services.niri.enableDefaultPath = false;
 
   # Configure keymap in X11
@@ -79,6 +91,10 @@ systemd.user.services.niri.enableDefaultPath = false;
   # Install firefox.
   programs.firefox.enable = true;
 
+  # Thunar file manager integration
+  programs.thunar.enable = true;
+  services.gvfs.enable = true;
+  services.tumbler.enable = true;
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 

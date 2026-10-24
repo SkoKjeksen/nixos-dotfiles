@@ -26,7 +26,7 @@ in
   programs.noctalia.enable = true;
 
   # Applications
-  programs.alacritty.enable = true;
+  # programs.alacritty.enable = true;
   # programs.fuzzel.enable = true;
   programs.swaylock.enable = true;
   # programs.waybar.enable = true;
@@ -70,6 +70,22 @@ in
     })
     configs;
 
+gtk = {
+  enable = true;
+  colorScheme = "dark";
+
+  theme = {
+    name = "Gruvbox-Dark";
+    package = pkgs.gruvbox-gtk-theme;
+  };
+
+  iconTheme = {
+    name = "Papirus-Dark";
+    package = pkgs.papirus-icon-theme;
+  };
+
+  gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
+};
   # Packages
   home.packages = with pkgs; [
     swaybg
@@ -86,6 +102,7 @@ in
     gcc
     unzip
     rofi
+    xfce.thunar
   ];
 }
 
