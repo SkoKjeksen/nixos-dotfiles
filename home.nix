@@ -1,0 +1,83 @@
+
+
+{ config, pkgs, inputs, ... }:
+
+let
+  dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
+  create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
+
+  configs = {
+    nvim = "nvim";
+    niri = "niri";
+    wezterm = "wezterm";
+    rofi = "rofi";
+    noctalia = "noctalia";
+};
+in
+{
+  home.username = "emil";
+  home.homeDirectory = "/home/emil";
+  home.stateVersion = "26.05";
+  
+  imports = [
+    inputs.noctalia.homeModules.default
+  ];
+
+  programs.noctalia.enable = true;
+
+  # Applications
+  programs.alacritty.enable = true;
+  # programs.fuzzel.enable = true;
+  programs.swaylock.enable = true;
+  # programs.waybar.enable = true;
+
+  # Services
+  # services.mako.enable = true;
+  programs.zsh.enable = true;
+  programs.starship.enable = true;
+  services.swayidle.enable = true;
+  services.polkit-gnome.enable = true;
+
+
+  programs.git = {
+      enable = true;
+      userName = "Emil Nilsen";
+      userEmail = "emil_n@live.no";
+    };
+
+  # Bash
+  programs.bash = {
+    enable = true;
+    shellAliases = {
+      btw = "echo i use nixos, btw";
+    };
+  };
+
+  # Symlink configuration files
+  xdg.configFile = builtins.mapAttrs
+    (name: subpath: {
+      source = create_symlink "${dotfiles}/${subpath}";
+      recursive = true;
+    })
+    configs;
+
+  # Packages
+  home.packages = with pkgs; [
+    zoxide
+    swaybg
+    xwayland-satellite
+    neovim
+    ripgrep
+    fd
+    fzf
+    lazygit
+    tree-sitter
+    nil
+    nixpkgs-fmt
+    nodejs
+    gcc
+    unzip
+    rofi
+  ];
+}
+
