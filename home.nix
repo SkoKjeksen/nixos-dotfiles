@@ -24,7 +24,6 @@ in
   ];
 
   programs.noctalia.enable = true;
-
   # Applications
   # programs.alacritty.enable = true;
   # programs.fuzzel.enable = true;
@@ -99,10 +98,23 @@ gtk = {
     nil
     nixpkgs-fmt
     nodejs
-    gcc
     unzip
     rofi
     xfce.thunar
+    spotify
+    discord
+
+    gdb
+    gcc
+    cmake
+    ninja
+    clang-tools
+    minicom
+    openocd
+    usbutils
+    wireshark
+    distrobox
+
   ];
 }
 

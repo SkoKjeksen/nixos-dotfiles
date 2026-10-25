@@ -15,6 +15,9 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  #Open ports for spotify
+  networking.firewall.allowedTCPPorts = [ 57621 ];
+  networking.firewall.allowedUDPPorts = [ 5353 ];
 
   # Set your time zone.
   time.timeZone = "Europe/Oslo";
@@ -50,6 +53,8 @@ programs.regreet = {
 programs.niri.enable = true;
 services.desktopManager.gnome.enable = true;
 systemd.user.services.niri.enableDefaultPath = false;
+
+programs.steam.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
