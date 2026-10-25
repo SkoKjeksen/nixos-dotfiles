@@ -2,8 +2,8 @@ prefer-no-csd
 
 input {
     keyboard {
-        repeat-delay 200
-        repeat-rate 35
+        repeat-delay 400
+        repeat-rate 30
         xkb {
         }
         numlock
@@ -21,6 +21,7 @@ input {
         // accel-profile "flat"
         // scroll-method "two-finger"
         // disabled-on-external-mouse
+        scroll-factor 0.5
     }
 
     mouse {

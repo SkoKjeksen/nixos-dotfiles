@@ -25,14 +25,11 @@ in
 
   programs.noctalia.enable = true;
   # Applications
-  # programs.alacritty.enable = true;
-  # programs.fuzzel.enable = true;
   programs.swaylock.enable = true;
   # programs.waybar.enable = true;
 
   # Services
   # services.mako.enable = true;
-  programs.starship.enable = true;
   services.swayidle.enable = true;
   services.polkit-gnome.enable = true;
 
@@ -103,6 +100,9 @@ gtk = {
     xfce.thunar
     spotify
     discord
+
+    zsh-powerlevel10k
+    meslo-lgs-nf
 
     gdb
     gcc
