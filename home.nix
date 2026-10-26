@@ -1,5 +1,4 @@
-
-
+#Home is for shared user apps and configurations files
 { config, pkgs, inputs, ... }:
 
 let
@@ -26,10 +25,8 @@ in
   programs.noctalia.enable = true;
   # Applications
   programs.swaylock.enable = true;
-  # programs.waybar.enable = true;
 
   # Services
-  # services.mako.enable = true;
   services.swayidle.enable = true;
   services.polkit-gnome.enable = true;
 
@@ -40,11 +37,8 @@ in
     syntaxHighlighting.enable = true;
   };
 
-  programs.git = {
-      enable = true;
-      userName = "Emil Nilsen";
-      userEmail = "emil_n@live.no";
-    };
+  programs.git.enable = true;
+
 
   # Bash
   programs.bash = {
@@ -84,7 +78,6 @@ gtk = {
 };
   # Packages
   home.packages = with pkgs; [
-    swaybg
     xwayland-satellite
     neovim
     ripgrep

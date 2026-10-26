@@ -1,16 +1,11 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos-btw"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Enable networking
@@ -27,17 +22,7 @@
 
   # Enable the GNOME Desktop Environment.
   # services.displayManager.gdm.enable = true;
-# programs.regreet = {
-#     enable = true;
-#
-#     settings  = {
-#         GTK = {
-#             application_prefer_dark_theme = true;
-#             theme_name = lib.mkForce "Adwaita-dark";
-#             font_name = lib.mkForce "JetBrains Mono 12";
-#           };
-#       };
-#   };
+
   services.greetd = {
       enable = true;
       settings = {
@@ -53,8 +38,6 @@
 programs.niri.enable = true;
 services.desktopManager.gnome.enable = true;
 systemd.user.services.niri.enableDefaultPath = false;
-
-programs.steam.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -95,7 +78,6 @@ programs.steam.enable = true;
 
   # Install firefox.
   programs.firefox.enable = true;
-
   # Thunar file manager integration
   programs.thunar.enable = true;
   services.gvfs.enable = true;

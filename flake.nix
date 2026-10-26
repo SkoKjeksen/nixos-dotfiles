@@ -14,13 +14,14 @@
 
 
 outputs = { self, nixpkgs, home-manager, ... } @ inputs: {
-  nixosConfigurations.nixos-btw = nixpkgs.lib.nixosSystem {
+  nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
 
     specialArgs = { inherit inputs; };
 
     modules = [
-      ./configuration.nix
+      ./configuration.nix #Common configuration for all machines
+      ./hosts/home/laptop # Laptop-specific configuration
 
       home-manager.nixosModules.home-manager
 
@@ -35,6 +36,50 @@ outputs = { self, nixpkgs, home-manager, ... } @ inputs: {
       }
     ];
   };
-};
+  nixosConfigurations.work = nixpkgs.lib.nixosSystem {
+    system = "x86_64-linux";
 
+    specialArgs = { inherit inputs; };
+
+    modules = [
+      ./configuration.nix #Common configuration for all machines
+      ./hosts/work # Work-specific configuration
+
+      home-manager.nixosModules.home-manager
+
+      {
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          extraSpecialArgs = { inherit inputs; };
+          users.emil = import ./home.nix;
+          backupFileExtension = "backup";
+        };
+      }
+    ];
+  };
+  nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
+    system = "x86_64-linux";
+
+    specialArgs = { inherit inputs; };
+
+    modules = [
+      ./configuration.nix #Common configuration for all machines
+      ./hosts/home/desktop # Desktop-specific configuration
+
+      home-manager.nixosModules.home-manager
+
+      {
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          extraSpecialArgs = { inherit inputs; };
+          users.emil = import ./home.nix;
+          backupFileExtension = "backup";
+        };
+      }
+    ];
+  };
+
+};
 }
