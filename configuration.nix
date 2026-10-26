@@ -29,7 +29,7 @@
           default_session = {
               # command = "${config.programs.niri.package}/bin/niri-session";
               # command = "${pkgs.niri}/bin/niri --session";
-              command = "${pkgs.cage}/bin/cage -s -- ${pkgs.noctalia-greeter}/bin/noctalia-greeter";
+              command = "${pkgs.coreutils}/bin/env XKB_DEFAULT_LAYOUT=no ${pkgs.cage}/bin/cage -s -- ${pkgs.noctalia-greeter}/bin/noctalia-greeter";
               user = "greeter";
             };
         };
