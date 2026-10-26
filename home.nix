@@ -30,12 +30,18 @@ in
   services.swayidle.enable = true;
   services.polkit-gnome.enable = true;
 
-  programs.zsh = {
+programs.zsh = {
+  enable = true;
+  enableCompletion = true;
+
+  autosuggestion.enable = true;
+  syntaxHighlighting.enable = true;
+
+  oh-my-zsh = {
     enable = true;
-    enableCompletion = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
+    theme = "robbyrussell";
   };
+};
 
   programs.git.enable = true;
 
