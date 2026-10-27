@@ -6,4 +6,6 @@
         name = "Emil Nilsen";
         email = "enilsen@akvagroup.com";
     };
+    nixpkgs.config.allowUnfree = true;
+    programs.vscode.enable = true;
 }
