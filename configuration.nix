@@ -70,11 +70,14 @@ systemd.user.services.niri.enableDefaultPath = false;
   users.users."emil" = {
     isNormalUser = true;
     description = "Emil";
+    shell = pkgs.zsh;
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
     #  thunderbird
     ];
   };
+
+  programs.zsh.enable = true;
 
   # Install firefox.
   programs.firefox.enable = true;
