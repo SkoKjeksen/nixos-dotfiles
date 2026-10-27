@@ -39,11 +39,22 @@ programs.zsh = {
 
   oh-my-zsh = {
     enable = true;
-    theme = "robbyrussell";
+    theme = "";
   };
+
+  initContent = ''
+    source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+    [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+  '';
 };
 
   programs.git.enable = true;
+
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+  };
 
 
   # Bash
@@ -58,6 +69,8 @@ programs.zsh = {
       enable = true;
       enableZshIntegration = true;
     };
+  home.file.".p10k.zsh".source = create_symlink "${dotfiles}/zsh/.p10k.zsh";
+
   # Symlink configuration files
   xdg.configFile = builtins.mapAttrs
     (name: subpath: {
@@ -96,7 +109,7 @@ gtk = {
     nodejs
     unzip
     rofi
-    xfce.thunar
+    thunar
     spotify
     discord
 
